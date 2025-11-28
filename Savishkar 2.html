@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savishkar | CUK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CUSTOM CSS ADDITIONS --- */
+        body { 
+            font-family: 'Roboto', sans-serif; 
+        }
+
+        /* 1. Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4338ca; /* Indigo-700 */
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3730a3;
+        }
+
+        /* 2. Backgrounds & Text Effects */
+        .hero-bg { 
+            /* Subtle dark overlay for better text readability */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://placehold.co/1920x800/2f2f4e/ffffff?text=CUK+Research+Innovation+Hub') center/cover; 
+            background-attachment: fixed; /* Parallax effect */
+        }
+        
+        /* Updated Gradient for contrast */
+        .text-gradient {
+            background: linear-gradient(to right, #f59e0b, #facc15); /* Amber-500 to Amber-400 */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 3. Glassmorphism (Frosted Glass) - Used in Hero */
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.5); /* Slightly darker for deeper contrast */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* 4. Animations */
+        .hover-lift { 
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+        }
+        /* More prominent lift and shadow */
+        .hover-lift:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(67, 56, 202, 0.4); 
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-entry {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Delay animations for children */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        /* Blob animation for the Catalyst section */
+        @keyframes blob {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite cubic-bezier(0.8, 0, 0.2, 1);
+        }
+        .animation-delay-2000 { animation-delay: 2s; }
+    </style>
+</head>
+<body class="antialiased text-gray-800 bg-gray-50">
+
+    <header class="bg-slate-900 sticky top-0 z-50 shadow-2xl border-b-4 border-amber-500/50">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            
+            <a href="#" class="flex items-center gap-3">
+                <img src="Screenshot 2025-11-28 161526.png" alt="Savishkar Logo" class="h-14">
+                
+                <span class="text-3xl font-black tracking-wider">
+                    <span class="text-gradient">SAVISHKAR</span> 
+                    <span class="text-indigo-300">CUK</span>
+                </span>
+            </a>
+            
+            <nav class="hidden md:flex space-x-3">
+                <a href="#home" class="nav-link text-gray-300 hover:text-white hover:bg-white/10 px-5 py-3 rounded-xl text-base font-semibold transition">Home</a>
+                <a href="#about" class="nav-link text-gray-300 hover:text-white hover:bg-white/10 px-5 py-3 rounded-xl text-base font-semibold transition">About</a>
+                <a href="#focus" class="nav-link text-gray-300 hover:text-white hover:bg-white/10 px-5 py-3 rounded-xl text-base font-semibold transition">Focus Areas</a>
+                <a href="#catalyst" class="nav-link text-amber-300 bg-amber-500/10 hover:bg-amber-500/20 px-5 py-3 rounded-xl text-base font-bold transition border border-amber-500/30">AI Catalyst</a>
+                <a href="#events" class="nav-link text-gray-300 hover:text-white hover:bg-white/10 px-5 py-3 rounded-xl text-base font-semibold transition">Events</a>
+                <a href="#contact" class="nav-link text-gray-300 hover:text-white hover:bg-white/10 px-5 py-3 rounded-xl text-base font-semibold transition">Contact</a>
+            </nav>
+
+            <button id="menu-btn" class="md:hidden text-white p-2 hover:bg-white/10 rounded-lg">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 px-2 pb-3 border-t border-white/10">
+            <a href="#home" class="block text-gray-300 hover:bg-white/10 hover:text-white px-3 py-2 rounded-md">Home</a>
+            <a href="#about" class="block text-gray-300 hover:bg-white/10 hover:text-white px-3 py-2 rounded-md">About</a>
+            <a href="#catalyst" class="block text-amber-400 hover:bg-white/10 px-3 py-2 rounded-md font-bold">AI Catalyst</a>
+            <a href="#contact" class="block text-gray-300 hover:bg-white/10 hover:text-white px-3 py-2 rounded-md">Contact</a>
+        </div>
+    </header>
+    <section id="home" class="hero-bg py-32 sm:py-48 flex items-center justify-center">
+        <div class="max-w-7xl mx-auto px-4 text-center glass-dark p-12 rounded-3xl shadow-2xl animate-entry">
+            <h1 class="text-6xl sm:text-8xl font-black text-white mb-6 leading-tight">
+                <span class="text-gradient block">SAVISHKAR</span>
+                <span class="text-3xl sm:text-4xl font-extrabold block mt-2 text-indigo-300">Innovation Unleashed</span>
+            </h1>
+            <p class="text-xl text-gray-200 mb-10 max-w-4xl mx-auto font-light">
+                Central University of Karnataka's premier hub for cutting-edge **research**, **sustainable tech**, and **entrepreneurship**.
+            </p>
+            <div class="flex justify-center gap-6">
+                <a href="#catalyst" class="px-10 py-4 rounded-full bg-amber-500 text-slate-900 text-lg font-bold hover:bg-amber-400 hover:scale-[1.02] transition shadow-xl shadow-amber-500/40">Try AI Catalyst</a>
+                <a href="#about" class="px-10 py-4 rounded-full bg-transparent border-2 border-indigo-400 text-white text-lg font-bold hover:bg-indigo-700/50 hover:border-indigo-500 hover:scale-[1.02] transition shadow-lg">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <hr/>
+
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+            <div class="animate-entry">
+                <h2 class="text-4xl font-black text-slate-900 mb-6 border-l-8 border-amber-500 pl-4">Academia Meets<br>Aspiration</h2>
+                <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                    We empower the next generation of researchers to address global challenges. From hardware prototypes to AI models, Savishkar provides the ecosystem to turn theory into reality.
+                </p>
+                <ul class="space-y-4 text-gray-700">
+                    <li class="flex items-center text-lg font-medium">✨ <span class="ml-3">Interdisciplinary Research & Development</span></li>
+                    <li class="flex items-center text-lg font-medium">🤝 <span class="ml-3">Industry-Grade Mentorship & Collaboration</span></li>
+                    <li class="flex items-center text-lg font-medium">💻 <span class="ml-3">24/7 Advanced Lab Access</span></li>
+                </ul>
+            </div>
+            <div class="mt-16 lg:mt-0 grid grid-cols-2 gap-6 text-center animate-entry delay-200">
+                <div class="p-8 bg-indigo-50 rounded-2xl hover-lift border-b-4 border-indigo-500 shadow-md">
+                    <p class="text-6xl font-black text-indigo-700 mb-2">50+</p>
+                    <p class="text-gray-700 font-extrabold uppercase tracking-widest text-sm">Labs</p>
+                </div>
+                <div class="p-8 bg-indigo-50 rounded-2xl hover-lift border-b-4 border-indigo-500 shadow-md">
+                    <p class="text-6xl font-black text-indigo-700 mb-2">1.5k+</p>
+                    <p class="text-gray-700 font-extrabold uppercase tracking-widest text-sm">Projects</p>
+                </div>
+                <div class="p-8 bg-indigo-50 rounded-2xl hover-lift border-b-4 border-indigo-500 shadow-md">
+                    <p class="text-6xl font-black text-indigo-700 mb-2">30+</p>
+                    <p class="text-gray-700 font-extrabold uppercase tracking-widest text-sm">Patents</p>
+                </div>
+                <div class="p-8 bg-indigo-50 rounded-2xl hover-lift border-b-4 border-indigo-500 shadow-md">
+                    <p class="text-6xl font-black text-indigo-700 mb-2">12</p>
+                    <p class="text-gray-700 font-extrabold uppercase tracking-widest text-sm">Centers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr/>
+
+    <section id="focus" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-black mb-16 text-slate-900">Core Research Domains</h2>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl border-t-8 border-indigo-600 hover-lift transition-all duration-300">
+                    <div class="text-5xl mb-4 bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto text-indigo-600">⚡</div>
+                    <h3 class="font-black text-xl mb-2 text-slate-800">Sustainable Energy</h3>
+                    <p class="text-sm text-gray-500">Solar, EV batteries & Green grid management.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl border-t-8 border-amber-500 hover-lift transition-all duration-300">
+                    <div class="text-5xl mb-4 bg-amber-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto text-amber-600">🧠</div>
+                    <h3 class="font-black text-xl mb-2 text-slate-800">AI & Data Science</h3>
+                    <p class="text-sm text-gray-500">Machine Learning models, NLP & Big Data solutions.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl border-t-8 border-blue-600 hover-lift transition-all duration-300">
+                    <div class="text-5xl mb-4 bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto text-blue-600">🤖</div>
+                    <h3 class="font-black text-xl mb-2 text-slate-800">Robotics & Automation</h3>
+                    <p class="text-sm text-gray-500">Industrial robots, embedded systems & control design.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl border-t-8 border-red-600 hover-lift transition-all duration-300">
+                    <div class="text-5xl mb-4 bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto text-red-600">🧬</div>
+                    <h3 class="font-black text-xl mb-2 text-slate-800">Biomedical & IoT</h3>
+                    <p class="text-sm text-gray-500">Point-of-care Healthcare devices & rapid Diagnostics kits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr/>
+
+    <section id="catalyst" class="py-24 bg-indigo-900 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+            <div class="absolute top-[-10%] right-[-5%] w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+            <div class="absolute bottom-[-10%] left-[-5%] w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <span class="inline-block py-2 px-4 rounded-full bg-amber-500 text-slate-900 text-sm font-black tracking-widest mb-4 shadow-lg">POWERED BY GEMINI AI</span>
+            <h2 class="text-5xl font-extrabold mb-4 text-white">Research Catalyst: Idea Sparker</h2>
+            <p class="mb-10 text-indigo-200 text-lg">Stuck on a problem statement? Leverage AI to instantly generate cutting-edge research proposals based on the latest data.</p>
+            
+            <div class="glass p-10 rounded-3xl shadow-2xl">
+                <textarea id="topic" rows="2" class="w-full p-5 bg-white/95 border border-white/50 rounded-xl focus:ring-4 ring-amber-500/80 outline-none text-gray-800 placeholder-gray-500 transition shadow-inner text-lg" placeholder="Enter topic (e.g., IoT in Organic Farming)..."></textarea>
+                
+                <button onclick="genIdea()" id="gen-btn" class="mt-6 w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-amber-500/50 transform hover:-translate-y-1 transition-all duration-300 ease-in-out">
+                    Generate Idea ✨
+                </button>
+                
+                <div id="loader" class="hidden mt-6 text-white font-medium text-lg">
+                    <div class="animate-spin h-6 w-6 border-4 border-white rounded-full border-t-transparent inline-block mr-2"></div> 
+                    Consulting AI...
+                </div>
+                
+                <div id="output" class="hidden mt-8 text-left bg-white p-8 rounded-2xl shadow-2xl border-l-8 border-amber-500">
+                    <h4 class="font-black text-slate-900 text-xl mb-4 flex items-center">
+                        <span class="text-3xl mr-3">💡</span> Proposal Draft:
+                    </h4>
+                    <div id="out-text" class="whitespace-pre-wrap text-slate-700 text-base leading-relaxed"></div>
+                    <div id="out-src" class="mt-6 pt-4 border-t border-gray-200 text-xs text-gray-500"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr/>
+
+    <section id="events" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-black text-center mb-16 text-slate-900">Latest Updates & Events</h2>
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-lg hover-lift group cursor-pointer border-t-4 border-indigo-700">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-bold tracking-wider">4-WEEK WORKSHOP</span>
+                        <span class="text-2xl text-gray-300 group-hover:text-indigo-700 transition font-extrabold">→</span>
+                    </div>
+                    <h3 class="font-bold text-2xl text-slate-800 group-hover:text-indigo-700 transition">Robotics & AI Prototyping Workshop</h3>
+                    <p class="text-gray-600 text-base mt-2">A comprehensive 4-week roadmap to unlock innovation, covering coding basics to final AI hackathon readiness. **Starting Nov 18th.**</p>
+                    <ul class="text-sm text-gray-500 mt-3 space-y-1">
+                        <li>**Mode:** Online (Free)</li>
+                        <li>**Certification:** By Savishkar India (90% Attendance)</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-lg hover-lift group cursor-pointer border-t-4 border-red-600">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-bold tracking-wider">SESSION III</span>
+                        <span class="text-2xl text-gray-300 group-hover:text-red-600 transition font-extrabold">→</span>
+                    </div>
+                    <h3 class="font-bold text-2xl text-slate-800 group-hover:text-indigo-700 transition">Arduino & Robotics: Week 2</h3>
+                    <p class="text-gray-600 text-base mt-2">Topic: **Interfacing Push Button and Mini Project**. Part of the ongoing Robotics Series led by Speaker Progyadipta.</p>
+                    <ul class="text-sm text-gray-500 mt-3 space-y-1">
+                        <li>**Date:** 27th November 2025 (Completed)</li>
+                        <li>**Time:** 6:30pm to 8:00pm</li>
+                        <li>**Mode:** Youtube Live</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-lg hover-lift group cursor-pointer border-t-4 border-amber-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="bg-amber-100 text-amber-700 px-4 py-1 rounded-full text-sm font-bold tracking-wider">SESSION II</span>
+                        <span class="text-2xl text-gray-300 group-hover:text-amber-500 transition font-extrabold">→</span>
+                    </div>
+                    <h3 class="font-bold text-2xl text-slate-800 group-hover:text-indigo-700 transition">Robotics Series: Session II</h3>
+                    <p class="text-gray-600 text-base mt-2">Continuation of the robotics series focusing on the basics of smart systems. Speaker: Progyadipta (4+ Years Exp).</p>
+                    <ul class="text-sm text-gray-500 mt-3 space-y-1">
+                        <li>**Date:** 24th November 2025 (Completed)</li>
+                        <li>**Time:** 6:30pm to 8:00pm</li>
+                        <li>**Mode:** Youtube Live</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <hr/>
+
+    <footer id="contact" class="bg-slate-900 text-white py-16 text-center border-t-8 border-indigo-700">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-12">
+            <div class="p-8 bg-slate-800 rounded-xl shadow-xl hover-lift">
+                <div class="text-4xl text-amber-500 mb-3">📍</div>
+                <h4 class="font-extrabold text-xl mb-1">Visit Us</h4>
+                <p class="text-gray-400 text-sm mt-1">Savishkar Innovation Hub,<br>CUK Campus, Kalaburagi, 585367</p>
+            </div>
+            <div class="p-8 bg-slate-800 rounded-xl shadow-xl hover-lift">
+                <div class="text-4xl text-amber-500 mb-3">📧</div>
+                <h4 class="font-extrabold text-xl mb-1">Email Us</h4>
+                <p class="text-gray-400 text-sm mt-1 break-all">savishkar@cuk.ac.in</p>
+                <p class="text-gray-500 text-xs mt-2">For general inquiries</p>
+            </div>
+            <div class="p-8 bg-slate-800 rounded-xl shadow-xl hover-lift">
+                <div class="text-4xl text-amber-500 mb-3">📞</div>
+                <h4 class="font-extrabold text-xl mb-1">Call Us</h4>
+                <p class="text-gray-400 text-sm mt-1">+91 8472 245000</p>
+                <p class="text-gray-500 text-xs mt-2">Main Office Hours: 9am - 5pm IST</p>
+            </div>
+        </div>
+        <p class="text-gray-600 text-xs tracking-wider font-semibold">&copy; 2025 Savishkar Innovation Hub | Central University of Karnataka. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        document.getElementById('menu-btn').onclick = () => document.getElementById('mobile-menu').classList.toggle('hidden');
+
+        // Gemini Logic (Remains the same)
+        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
+        const apiKey = ""; // Insert Key Here
+
+        async function genIdea() {
+            const topic = document.getElementById('topic').value.trim();
+            if (!topic) return alert("Please enter a topic.");
+
+            const ui = { btn: document.getElementById('gen-btn'), load: document.getElementById('loader'), out: document.getElementById('output'), txt: document.getElementById('out-text'), src: document.getElementById('out-src') };
+            
+            ui.btn.disabled = true; ui.btn.classList.add('opacity-50', 'cursor-not-allowed');
+            ui.load.classList.remove('hidden'); ui.out.classList.add('hidden'); ui.src.innerHTML = '';
+
+            try {
+                const res = await fetch(`${API_URL}?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: `Generate a novel research idea for a B.Tech project about: ${topic}` }] }],
+                        tools: [{ "google_search": {} }],
+                        systemInstruction: { parts: [{ text: "You are a Research Mentor. Provide a Title (Bold), Abstract (2 sentences), and 3 Key Hardware/Software Requirements. Ensure the output is formatted with line breaks for readability." }] }
+                    })
+                });
+                
+                const data = await res.json();
+                const cand = data.candidates?.[0];
+                
+                if (cand?.content?.parts?.[0]?.text) {
+                    ui.txt.innerText = cand.content.parts[0].text;
+                    const sources = cand.groundingMetadata?.groundingAttributions?.filter(s => s.web?.title && s.web?.uri).slice(0,3) || [];
+                    if(sources.length) {
+                        ui.src.innerHTML = '<b>Sources:</b> ' + sources.map(s => `<a href="${s.web.uri}" target="_blank" class="text-indigo-600 underline hover:text-indigo-800">${s.web.title}</a>`).join(', ');
+                    }
+                    ui.out.classList.remove('hidden');
+                    // Smooth scroll to output
+                    ui.out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else { throw new Error("No response"); }
+            } catch (e) {
+                console.error(e);
+                alert("Error generating idea. Check API Key.");
+            } finally {
+                ui.btn.disabled = false; ui.btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                ui.load.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
